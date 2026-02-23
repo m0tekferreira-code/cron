@@ -1,8 +1,8 @@
 from fasthtml.common import *
 from starlette.responses import HTMLResponse
 
-# Inicializa a aplicação FastHTML
-app, rt = fast_app()
+# Inicializa a aplicação FastHTML (live=False é OBRIGATÓRIO no Vercel para evitar crashes)
+app, rt = fast_app(live=False)
 
 # O código HTML completo do SPA
 html_content = """<!DOCTYPE html>
