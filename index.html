@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+from fasthtml.common import *
+from starlette.responses import HTMLResponse
+
+# Inicializa a aplicação FastHTML
+app, rt = fast_app()
+
+# O código HTML completo do SPA
+html_content = """<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -45,22 +52,6 @@
             border-radius: 4px;
         }
     </style>
-    <!-- Chosen Palette: Warm Stone & Amber (Solarized Light vibe) - Minimalistic, educational, warm neutrals base with functional accents -->
-    <!-- Application Structure Plan: Designed as a progressive learning dashboard ("Cron Academy"). 
-         1. 'Conceito': Introduces the analogy (Employee) to build a mental model.
-         2. 'Laboratório de Sintaxe': Interactive builder for the 5 asterisks allowing users to 'play' with time.
-         3. 'Símbolos & Poderes': Accordion-style exploration of modifiers (* , - /).
-         4. 'Simulador de Carga (Pro Tips)': Uses a Chart.js visualization to demonstrate the impact of bad cron scheduling (server load), reinforcing the "Pro Tip" about optimization.
-         5. 'Quiz Final': Validates knowledge with immediate feedback.
-         This structure moves from theory -> practice -> consequence -> testing. -->
-    <!-- Visualization & Content Choices: 
-         1. Analogy: Text & Iconography -> To simplify the abstract concept.
-         2. Interactive Builder: Inputs mapped to a dynamic sentence -> To demystify the syntax position by position.
-         3. Server Load Chart: Bar Chart (Chart.js) -> Visualizes the 'Why' behind scheduling best practices (Pro Tip #4). Shows CPU spikes at 00:00 vs optimized distribution.
-         4. Quiz: Interactive Form -> Active recall of the provided examples.
-         5. Terminal: Styled HTML div -> Simulates the `crontab -e` environment safely. 
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
 <body class="bg-stone-50 text-stone-800 min-h-screen flex flex-col">
 
@@ -573,3 +564,13 @@
     </script>
 </body>
 </html>
+"""
+
+# Configura a rota principal
+@rt("/")
+def get():
+    return HTMLResponse(html_content)
+
+# Necessário para testar localmente caso execute "python main.py"
+if __name__ == '__main__':
+    serve()
